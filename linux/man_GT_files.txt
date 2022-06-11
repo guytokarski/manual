@@ -1,0 +1,116 @@
+########### INFO
+# dir size
+du -sh /le_repertoire
+
+# disk available space
+df -h
+
+# open file in real time
+tail -f /usr/local/psa/var/log/maillog
+
+
+########### PERMISSIONS
+# list
+ls -al
+
+# change owner
+chown www-data mon_proj/
+
+# change group
+chgrp www-data mon_proj/
+
+# change permissions
+chmod 755 mon_dossier/
+chmod 644 mon_fichier
+
+# affecter user dans group
+sudo adduser nom_utilisateur nom_groupe
+
+
+########### COPY
+# copy
+
+# move
+mv -R source dest
+
+
+# rm files begin with
+find . -maxdepth 1 -name "commencepar*" -type f -exec rm -f {} \;
+
+# renommer bulk
+# find . -name "*.*" -print | xargs sed -i 's/ancienne_chaine/nouvelle_chaine/g'
+
+
+for f in *.xml; do fn=`echo $f|sed 's/Done_//g'`; mv "$f" "$fn"; done
+
+
+########### SCP
+# from local to remote
+
+
+
+# from remote to local
+scp myusername@university_computer:/home/myusername/file.odt /local/destination/path/
+
+
+
+
+########### COMPRESSION
+# tar.gz compress
+tar -zcvf votre_archive.tar.gz votre_dossier/
+
+# exclude
+tar -czvf 2011.10.24.tar.gz /home/user/start-directory --exclude "/home/user/start-directory/logs"
+
+# exclude relative
+tar -czvf 2011.10.24.tar.gz ./start-directory --exclude "./start-directory/logs"
+
+# exclude multiple
+tar --exclude='./folder' --exclude='./upload/folder2' -zcvf /backup/filename.tgz .
+
+
+
+# decompress
+tar -zxvf votre_archive.tar.gz
+
+
+# zip
+
+
+
+########### FILE READ EDIT
+# TAIL
+# display file at the end
+tail -f error.log
+
+# CRON
+EDOTOR=nano crontab -e
+
+
+
+
+########### GREP
+# search word in a file
+grep myword truc.txt 
+
+# case sensitive
+grep -i myWord truc.txt
+
+# in a drirectory
+grep -i myWord theDir/
+
+# in a drirectory recursive
+grep -i myWord theDir/*
+
+
+########### VI
+i => insert
+:w => write
+:q! => quit
+dd => delete current line
+
+
+
+
+
+

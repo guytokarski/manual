@@ -1,0 +1,55 @@
+############################ How to create a self-signed SSL Certificate ...
+#...  which can be used for testing purposes or internal usage
+
+# Step 1: Generate a Private Key - with pathphrase
+openssl genrsa -des3 -out server.key 1024
+
+# Step 2: Generate a CSR (Certificate Signing Request)
+openssl req -new -key server.key -out server.csr
+
+	Country Name (2 letter code) [GB]:CH
+	State or Province Name (full name) [Berkshire]:Bern
+	Locality Name (eg, city) [Newbury]:Oberdiessbach
+	Organization Name (eg, company) [My Company Ltd]:Akadia AG
+	Organizational Unit Name (eg, section) []:Information Technology
+	Common Name (eg, your name or your server's hostname) []:public.akadia.com
+	Email Address []:martin dot zahn at akadia dot ch
+	Please enter the following 'extra' attributes
+	to be sent with your certificate request
+	A challenge password []:
+	An optional company name []:
+
+# Step 3: Remove Passphrase from Key
+cp server.key server.key.org
+openssl rsa -in server.key.org -out server.key
+
+# The newly created server.key file has no more passphrase in it.
+
+-rw-r--r-- 1 root root 745 Jun 29 12:19 server.csr
+-rw-r--r-- 1 root root 891 Jun 29 13:22 server.key
+-rw-r--r-- 1 root root 963 Jun 29 13:22 server.key.org
+
+# Step 4: Generating a Self-Signed Certificate
+# To generate a temporary certificate which is good for 365 days, issue the following command:
+openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
+
+# Step 5: Installing the Private Key and Certificate
+cp server.crt /usr/local/apache/conf/ssl.crt
+cp server.key /usr/local/apache/conf/ssl.key
+
+# Step 6: Configuring SSL Enabled Virtual Hosts
+
+SSLEngine on
+SSLCertificateFile /usr/local/apache/conf/ssl.crt/server.crt
+SSLCertificateKeyFile /usr/local/apache/conf/ssl.key/server.key
+SetEnvIf User-Agent ".*MSIE.*" nokeepalive ssl-unclean-shutdown
+CustomLog logs/ssl_request_log \
+   "%t %h %{SSL_PROTOCOL}x %{SSL_CIPHER}x \"%r\" %b"
+
+# Step 7: Restart Apache and Test
+
+/etc/init.d/httpd stop
+/etc/init.d/httpd stop
+
+# test
+https://public.akadia.com

@@ -1,0 +1,13 @@
+
+
+
+^a : commenece par a
+a$ : fini par a
+a? : a 0 ou 1 fois
+a+ : a au moins une fois
+a* : a 0, 1 ou plusieurs fois
+a{3,5} : a apparait de 3 à 5 fois
+
+
+
+(^([\d+])[+,-]?$)|^[*]$

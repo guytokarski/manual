@@ -1,0 +1,153 @@
+########################################## CONSOLE
+
+php bin/console generate:bundle
+php bin/console generate:doctrine:entity
+
+php bin/console cache:clear
+
+php bin/console doctrine:generate:entities NamespaceMachinBundle:Entity
+php bin/console doctrine:generate:form NamespaceMachinBundle:Entity
+
+php bin/console doctrine:schema:update --dump-sql
+php bin/console doctrine:schema:update --force
+
+php bin/console assets:install web
+
+
+########################################## DEBUG
+<pre>
+	\Doctrine\Common\Util\Debug::dump($object, 3); exit;
+</pre>
+
+
+########################################## DOCTRINE ANNOTATIONS
+# collection - classe inverse
+/**
+ * @ORMTable(name="Region")
+ * @ORMEntity
+ */
+class Region
+{
+    /**
+     * @var decimal $identifiantRegion
+     *
+     * @ORMColumn(name="idRegion", type="bigint", nullable=false)
+     * @ORMId
+     * @ORMGeneratedValue(strategy="IDENTITY")
+     */
+    private $identifiantRegion;
+ 
+    /**
+     * @var text $nom
+     *
+     * @ORMColumn(name="nom", type="string", length=60, nullable=true)
+     */
+    private $nom;
+ 
+     /**
+     * @var ArrayCollection $departements
+     *
+     * @ORMOneToMany(targetEntity="Departement", mappedBy="region", cascade={"persist", "remove", "merge"})
+     */
+    private $departements;
+
+    // ----
+}
+
+
+# collection - classe owner
+/**
+ * @ORMTable(name="Departement")
+ * @ORMEntity
+ */
+class Departement
+{
+    /**
+     * @var decimal $identifiantDepartement
+     *
+     * @ORMColumn(name="idDepartement", type="bigint", nullable=false)
+     * @ORMId
+     * @ORMGeneratedValue(strategy="IDENTITY")
+     */
+    private $identifiantDepartement;
+ 
+    /**
+     * @var text $nom
+     *
+     * @ORMColumn(name="nom", type="string", length=60, nullable=true)
+     */
+    private $nom;
+ 
+    /**
+     * @var Region $region
+     *
+     * @ORMManyToOne(targetEntity="Region", inversedBy="departements", cascade={"persist", "merge"})
+     * @ORMJoinColumns({
+     *  @ORMJoinColumn(name="Region_idRegion", referencedColumnName="idRegion")
+     * })
+     */
+    private $region;
+
+    // ----
+}
+
+
+########################################## FORMS
+# CollectionType
+
+use Doctrine\Common\Collections\ArrayCollection;
+
+// ...
+public function editAction($id, Request $request)
+{
+    $em = $this->getDoctrine()->getManager();
+    $task = $em->getRepository('AppBundle:Task')->find($id);
+
+    if (!$task) {
+        throw $this->createNotFoundException('No task found for id '.$id);
+    }
+
+    $originalTags = new ArrayCollection();
+
+    // Create an ArrayCollection of the current Tag objects in the database
+    foreach ($task->getTags() as $tag) {
+        $originalTags->add($tag);
+    }
+
+    $editForm = $this->createForm(TaskType::class, $task);
+
+    $editForm->handleRequest($request);
+
+    if ($editForm->isValid()) {
+
+        // remove the relationship between the tag and the Task
+        foreach ($originalTags as $tag) {
+            if (false === $task->getTags()->contains($tag)) {
+                // remove the Task from the Tag
+                $tag->getTasks()->removeElement($task);
+
+                // if it was a many-to-one relationship, remove the relationship like this
+                // $tag->setTask(null);
+
+                $em->persist($tag);
+
+                // if you wanted to delete the Tag entirely, you can also do that
+                // $em->remove($tag);
+            }
+        }
+
+        $em->persist($task);
+        $em->flush();
+
+        // redirect back to some edit page
+        return $this->redirectToRoute('task_edit', array('id' => $id));
+    }
+
+    // render some form template
+}
+
+
+
+
+
+

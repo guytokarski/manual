@@ -1,0 +1,3 @@
+	$str = print_r(  $tavariable   ,true)."\n\r";
+	$f = fopen('abc.txt','a'); fputs($f,print_r(  $tavariable   ,true)."\n\r"); fclose($f);
+

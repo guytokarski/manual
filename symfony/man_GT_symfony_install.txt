@@ -1,0 +1,77 @@
+# create full
+composer create-project symfony/website-skeleton my_project_name
+composer require symfony/web-server-bundle --dev
+
+# mailhog
+sudo apt-get -y install golang-go
+go get github.com/mailhog/MailHog
+# launch ~/go/bin/MailHog
+
+
+# .env.dev.local
+DATABASE_URL="mysql://root:trou@BQL@127.0.0.1:3306/geogamez?serverVersion=mariadb-10.3.25"
+MAILER_DSN=smtp://localhost:1025
+
+
+# create db
+bin/console doctrine:database:create
+
+# launch php server in directory
+php -S localhost:8000
+php -S 127.0.0.1:8000 -t public
+
+
+# create controller
+bin/console make:controller Post
+
+# annotation
+
+
+# create entity
+bin/console make:entity Post
+# types: string, text, integer, datetime
+
+# annotation
+
+# migration
+bin/console make:migration
+bin/console doctrine:migrations:migrate
+
+
+# forms
+bin/console make:form Post
+
+
+# users auth and registration
+bin/console make:user
+bin/console make:migration
+bin/console doctrine:migrations:migrate
+
+composer require symfonycasts/verify-email-bundle
+bin/console make:auth
+bin/console make:registration-form
+bin/console make:migration
+bin/console doctrine:migrations:migrate
+
+composer require symfonycasts/reset-password-bundle
+bin/console make:reset-password
+bin/console make:migration
+bin/console doctrine:migrations:migrate
+
+# slugs
+composer require antishov/doctrine-extensions-bundle
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,143 @@
+
+####################################### INSTALL #######################################
+############### GIT
+sudo apt-get install git
+git config --global user.name "gtokarski"
+git config --global user.email "gtokarski@culmail.com"
+git config --list
+
+
+############### LOCAL FROM SCRATCH
+# creation depot dans un repertoire. Va creer un .git caché
+git init
+
+# versionning of all files and folders in the folder of .git
+git add *
+
+
+
+############### SSH REMOTE REPOSITORY
+# list existing ssh keys
+ls -al ~/.ssh
+ls -al /home/gtokarski/ .ssh
+
+# create ssh key
+ssh-keygen -t rsa -b 4096 -C "gtokarski@b-i.com"
+
+# add key to ssh agent
+ssh-agent -s
+ssh-add /home/gtokarski/.ssh/id_rsa
+
+# copy the key on remote interface with xclip
+xclip -selection clipboard < ~/.ssh/id_rsa.pub
+
+# clone from remote
+git clone ssh://git@stash.b-i.com:7999/at/attitudebio.git /home/gtokarski/projects/attitudebio
+
+
+####################################### CONFIGS #######################################
+### GITIGNORE
+# .gitignore
+# Exclude local files in .git/info/exclude
+vendor
+composer.phar
+composer.lock
+.project
+.settings
+.buildpath
+
+# Problemes de type: Could not resolve host ? essai ca :
+git config --global --unset http.proxy
+git config --global --unset https.proxy
+
+
+####################################### REMOTE CONNECT ################################
+# Creer le .git, avec son index de commits. par defaut : branche master virtuelle
+git init
+
+# ajoute les fichiers au versionning
+git add .
+
+# valide les modifs em commitant
+git commit -m "changes"
+
+# Connexion a un remote exisant, on lui donne un nom pour retrouver, ici mine
+git remote add mine ssh://git@stash.b-i.com:7999/at/attitudebio.git
+
+# push sur le remote: on peut avoir un autre nom de branche locale, que l'on precise
+git push mine master_local[:master]
+
+# from gitub...
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin git@github.com:guytokarski/geogamez.git
+git push -u origin main
+
+####################################### BASE COMMANDS #################################
+############### VERSIONNING
+# status
+git status
+
+# adding in commit list
+git add myfile.txt
+
+# commit the list
+git commit -m myfile.txt
+
+# push
+git push
+
+
+
+############### GITIGNORE
+git rm . -r --cached
+git add .
+git commit -m "fixed untracked files"
+
+
+
+# remove from staging
+git rm --cached .settings/*
+
+
+############### STASH 
+# List saved stash
+git stash list
+
+# Do the stash
+git stash
+
+# recover the last stash
+git stash apply
+
+# With the index of the wanted stash
+git stash apply@{0}
+git stash apply@{nb}
+
+
+############# REVERT RESET...
+# when already pushed
+git revert -m 1 <commit>
+
+# To replace, reset
+# can make one a branch (last commit) or on a commit hash
+git reset --hard origin/master/development
+
+
+# cherry pick
+git log --pretty=oneline
+git cherry-pick <commit>
+
+
+
+
+
+
+
+
+
+
+
+

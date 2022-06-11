@@ -1,0 +1,254 @@
+
+####################################### INSTALL #######################################
+### SSH
+sudo apt-get install openssh-client
+sudo apt-get install openssh-server
+
+# if dependencies problems
+sudo apt-get install openssh-client=1:5.9p1-5ubuntu1
+sudo apt-get install openssh-server
+
+
+### FTP
+sudo apt-get install pure-ftpd
+
+
+
+####################################### VM network conf ###########################################
+# Shut down Guest VM
+# In VBox preferences, select Network and "Adapter 2." Enable it and set "Attached-to" to "Host-Only Adapter"
+# Power on Guest VM. Run the following command:
+$ sudo ifconfig eth1
+
+
+# Now you'll need to edit /etc/network/interfaces. Change the address to your base IP address.
+
+auto eth0
+iface eth0 inet dhcp
+
+auto eth1
+iface eth1 inet static
+address 192.168.56.101
+netmask 255.255.255.0
+
+# retart network
+sudo service networking restart
+
+# manually
+sudo ifconfig eth0 up
+
+####################################### SSH ###########################################
+
+# demarrer
+/etc/init.d/ssh start
+
+sudo service ssh restart
+
+#From the host machine to guest machine:
+$ ssh user@192.168.56.101 (change this to whatever the guest IP address is)
+
+
+
+####################################### FTP ###########################################
+
+sudo /etc/init.d/pure-ftpd restart
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

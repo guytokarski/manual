@@ -1,0 +1,76 @@
+################### INSTALL
+# Install nodejs
+sudo apt-get install python-software-properties python g++ make
+sudo add-apt-repository ppa:chris-lea/node.js
+sudo apt-get update
+sudo apt-get install nodejs
+
+# Installs npm
+sudo apt install npm
+
+
+npm install nomdumodule
+sudo npm install nomdumodule -g // en global
+npm update // telecharge, maj les modules du package.json
+
+
+
+# Gulp
+npm install gulp-cli -g
+npm install gulp -D
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+################## Base
+# exemple appli minimale
+
+
+
+# lancer l'appli
+node serveur.js
+
+
+################## Express
+# install comme module
+npm install express
+
+# install structure avec generator
+npm install -g express-generator // cree la structure du projet, et package.json
+npm install // install dependances
+npm start // strat server sur localhost:3000
+
+# Install avec yeoman ?
+// TODO
+
+
+# Pour utiliser dans appli
+var express = require('express');
+var app = express();
+

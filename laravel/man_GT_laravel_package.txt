@@ -1,0 +1,83 @@
+// creer un dossier packages/monnamespace/monpackage
+workspace/geo/packages/geoguy/colmodel
+
+// a l'interieur composer init
+composer init
+
+// dans le configurateur
+Package name: geoguy/colmodel
+Minimum Stability []: dev
+Package Type: library
+Licence []: MIT
+
+// dependencies
+// illuminate/support pou Laravel
+// php pour php
+
+// dev-dependencies
+// phpunit/phpunit
+
+// ok, composer.json est cree
+
+// ajouter README.md et CHANGELOG.md
+
+// ajouter le service provider: /packages/geoguy/colmodel/src/Providers/ColmodelServiceProvider
+
+namespace Geoguy\Colmodel\Providers;
+
+use Illuminate\Support\ServiceProvider;
+
+Class ColmodelServiceProvider extends ServiceProvider
+{
+  public function boot()
+  {
+
+  }
+
+  public function register()
+  {
+
+  }
+}
+
+// dans composer.json, ajouter aotoload psr-4
+"autoload": {
+        "psr-4":{
+            "Geoguy\\Colmodel\\": "src"
+        }
+    },
+    
+// Pour acceder a ce package dans notre projet de base, ajouter dans le composer.json du projet, dans "autoload":
+"psr-4": {
+            "App\\": "app/",
+            "Geoguy\\Colmodel\\": "packages/geoguy/colmodel/src"
+        },
+
+// et dans le config/app.php
+/*
+ * Package Service Providers...
+ */
+ \Geoguy\Colmodel\Providers\ColmodelServiceProvider::class,
+
+// puis à la racine du projet de base, taper la commande :
+composer dumpautoload
+
+
+// Git du package, creer le repo colmodel sur Github
+// dand le dossier du package ./geoguy/colmodel
+git init
+git add .
+git commit -m "First commit"
+git remote add origin git@github.com:guytokarski/colmodel.git
+git push origin master
+
+
+
+
+
+
+
+
+
+
+

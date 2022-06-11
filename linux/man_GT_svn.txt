@@ -1,0 +1,5 @@
+# install
+sudo apt install subversion apache2 libapache2-svn
+
+# checkout
+svn checkout https://scm.b-i.com/svn/JTI-ingredients ingredients

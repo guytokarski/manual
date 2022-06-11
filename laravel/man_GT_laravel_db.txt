@@ -1,0 +1,60 @@
+// BASE
+
+DB::select('SELECT * FROM posts'); // retourne objet ou tableau selon FETCH_ASSOC ou FETCH_OBJ
+
+$title = 'un titre';
+$body = 'un body';
+DB::insert('INSERT INTO posts(title, body) VALUES (:title, :body)', ['title' => $title, 'body' => $body]);
+
+
+// Fluent Query Builder
+DB::table('posts')->get(); //retourn une collection
+DB::table('posts')->get(['title as heading', 'body']); //retourn une collection
+
+DB::table('posts')
+	->where('id', '>', 2)
+	->orderBy('title', 'desc')
+	->limit(2)
+	->get();
+	
+DB::table('posts')->insert([
+	[
+	'title' => 'nouveau titre',
+	'body' => 'nouveau contenu'
+	],
+	[
+	'title' => 'nouveau titre 2',
+	'body' => 'nouveau contenu 2'
+	]
+);
+
+
+DB::table('posts')->whereId(1)->update(
+	['title' =>"titre11"]
+);
+
+DB::table('posts')->whereId(1)->delete();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

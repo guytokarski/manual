@@ -1,0 +1,10 @@
+# redirect permenanent .htaccess
+
+
+Redirect permanent /univers /actualites
+
+
+
+
+fC3ZFjVTfbkrLbin
+

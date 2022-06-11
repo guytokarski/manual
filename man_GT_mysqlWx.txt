@@ -1,0 +1,28 @@
+mysqldump -u root -p chocolatvillars > mydump.sql
+
+
+mysql -u root -p chocolatvillars < chocolatvillars.sql
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

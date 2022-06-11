@@ -1,0 +1,19 @@
+/* Aligner et centrer le contenu de <li> */
+
+#content .shares li {
+    background-color: #c3c3c3;
+    display: block;
+    float: left;
+    height: 70px;
+    line-height: 70px;
+    list-style: outside none none;
+    text-align: center;
+    width: 70px;
+}
+
+
+/* Resize image responsive dans div */
+img {
+	width: 100%;
+	height: auto;
+}

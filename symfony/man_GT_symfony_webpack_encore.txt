@@ -1,0 +1,36 @@
+
+
+# install node npm
+sudo apt-get update
+sudo apt-get install nodejs npm
+
+
+# install encore in symfony
+composer require symfony/webpack-encore-bundle
+npm install 
+
+# see/add in webpack.config.js and in assets dir
+.addEntry('makeaface', './assets/culan/makeaface.js')
+
+# react
+npm add @babel/preset-react --dev
+npm add react react-dom prop-types
+
+# enable in webpack.config.js
+.enableReactPreset()
+
+# d3
+npm add d3
+
+
+
+
+npm run dev
+
+
+
+
+
+
+
+

@@ -1,0 +1,63 @@
+// https://laravel.com/
+
+composer create-project --prefer-dist laravel/laravel blog
+
+
+// Apache configs
+cd /var/www/html/
+sudo ln -s /home/guy/workspace/histo /var/www/html/histo
+
+cd /etc/apache2/sites-available/
+sudo cp geo.conf histo.conf
+
+sudo nano histo.conf
+
+<VirtualHost *:80>
+        ServerName geo.loc
+        DocumentRoot /var/www/html/geo/public/
+        <Directory /var/www/html/geo/public/ >
+                Options Indexes FollowSymlinks Multiviews
+                DirectoryIndex index.php
+                AllowOverride All
+                Order allow,deny
+                Allow from all
+        </Directory>
+        <Location / >
+                RewriteEngine On
+                RewriteCond %{REQUEST_FILENAME} -s [OR]
+                RewriteCond %{REQUEST_FILENAME} -l [OR]
+                RewriteCond %{REQUEST_FILENAME} -d
+                RewriteRule ^.*$ - [NC,L]
+                RewriteRule ^.*$ /index.php [NC,L]
+        </Location>
+</VirtualHost>
+
+
+
+cd /etc/apache2/sites-enabled/
+sudo ln -s /etc/apache2/sites-available/histo.conf histo.conf
+
+sudo nano /etc/hosts
+127.0.0.1	histo.loc
+
+sudo service apache2 restart
+
+// Allow apache on histo
+cd /home/guy/workspace
+sudo chgrp -R www-data histo
+
+
+// Configs
+database -> /.env
+
+// github
+echo "# 3gimmotest" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin git@github.com:guytokarski/3gimmotest.git
+git push -u origin main
+
+
+
