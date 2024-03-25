@@ -1,0 +1,21 @@
+# metal gris fonce
+background: linear-gradient(130deg, rgba(0,0,0,0.9) 0%, rgba(186,186,186,0.96) 35%, rgba(91,91,91,0.9) 100%);
+
+
+background: linear-gradient(130deg, rgba(0,0,0,1) 0%, rgba(186,186,186,1) 35%, rgba(91,91,91,1) 100%);
+
+
+# marron
+background: linear-gradient(130deg, rgba(87,38,0,1) 0%, rgba(204,187,142,0.91) 35%, rgba(122,43,0,1) 100%);
+
+
+# vert
+background: linear-gradient(130deg, rgba(39,115,14,0.85) 0%, rgba(173,230,102,1) 35%, rgba(27,147,0,0.91) 100%);
+
+
+
+
+
+
+
+background: linear-gradient(45deg, rgba(63,196,20,0.8491597322522759) 0%, rgba(62,105,9,0.87156869583771) 50%);
