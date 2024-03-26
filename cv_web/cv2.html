@@ -13,8 +13,8 @@ h1 {
   font-family: Garamond, serif;
   font-size: 40px;
   font-weight: bold;
-  color: darkblue;
-  margin-left: 40px;
+  color: steelblue;
+  margin: 20px;
   letter-spacing: 6px;
 }
 
@@ -25,6 +25,10 @@ h2 {
   margin: 0px;
   text-align: center;
   margin-bottom : 10px;
+}
+
+#table-experience {
+  table-layout: fixed;
 }
 
 #table-experience h3 {
@@ -43,10 +47,29 @@ p {
   margin: 0px;
 }
 
-#table-experience .column-year {
+#table-experience .column-dom {
+  background-color: steelblue;
+  color: white;
+  text-align: center;
+}
+
+#table-experience .column-dom div{
+  width: 50px;
+  transform: rotate(-90deg);
+}
+
+#table-experience .column-year-title {
   background-color: steelblue;
   color: white;
   width: 200px;
+  vertical-align: top;
+  text-align: right;
+}
+
+#table-experience .column-year {
+  background-color: steelblue;
+  color: white;
+  width: 147px;
   vertical-align: top;
   text-align: right;
 }
@@ -141,7 +164,7 @@ p {
 	<table id="table-experience">
 		<thead>
 			<tr>
-				<th class="column-year">
+				<th class="column-year-title" colspan="2">
 					<p class="annee-dates">EXPERIENCE</p>					
 				</th>
 				<th class="column-expe">					
@@ -151,6 +174,9 @@ p {
 		
 		<tbody>
 			<tr>
+				<td class="column-dom">
+					<div class="annee-domaine">DataViz</div>									
+				</td>
 				<td class="column-year">
 					<p class="annee-dates">2020-2023</p>
 					<p class="annee-loc">Annecy (74)</p>					
@@ -162,8 +188,11 @@ p {
 				</td>
 			</tr>
 			<tr>
+				<td class="column-dom" rowspan="2">
+					<div class="annee-domaine">E-Commerce</div>									
+				</td>
 				<td class="column-year">
-					<p class="annee-dates">Mai 2019 - Janvier 2020</p>
+					<p class="annee-dates">Mai 2019 - Jan 2020</p>
 					<p class="annee-loc">Annecy (74)</p>					
 				</td>
 				<td class="column-expe">
@@ -174,7 +203,7 @@ p {
 			</tr>
 			<tr>
 				<td class="column-year">
-					<p class="annee-dates">Avril 2015 - Octobre 2018</p>
+					<p class="annee-dates">Avr 2015 - Oct 2018</p>
 					<p class="annee-loc">Genève (CH)</p>					
 				</td>
 				<td class="column-expe">
@@ -184,8 +213,11 @@ p {
 				</td>
 			</tr>
 			<tr>
+				<td class="column-dom" rowspan="2">
+					<div class="annee-domaine">WebMarketing</div>									
+				</td>
 				<td class="column-year">
-					<p class="annee-dates">Juin - Novembre 2014</p>
+					<p class="annee-dates">Juin - Nov 2014</p>
 					<p class="annee-loc">Annecy (74)</p>					
 				</td>
 				<td class="column-expe">
@@ -196,7 +228,7 @@ p {
 			</tr>
 			<tr>
 				<td class="column-year">
-					<p class="annee-dates">Octobre 2012 - Juin 2014</p>
+					<p class="annee-dates">Oct 2012 - Juin 2014</p>
 					<p class="annee-loc">Grenoble (38)</p>					
 				</td>
 				<td class="column-expe">
@@ -206,8 +238,11 @@ p {
 				</td>
 			</tr>
 			<tr>
+				<td class="column-dom" rowspan="2">
+					<div class="annee-domaine">Info Gestion</div>									
+				</td>
 				<td class="column-year">
-					<p class="annee-dates">Septembre 2009 - Octobre 2012</p>
+					<p class="annee-dates">Sept 2009 - Oct 2012</p>
 					<p class="annee-loc">Annecy (74)</p>					
 				</td>
 				<td class="column-expe">
