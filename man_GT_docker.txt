@@ -1,0 +1,44 @@
+Installer Docker
+# Mettez à jour le gestionnaire de paquets :
+sudo apt update
+
+# Installez les paquets requis pour permettre à apt d'utiliser un dépôt sur HTTPS :
+sudo apt install apt-transport-https ca-certificates curl software-properties-common
+
+# Ajoutez la clé GPG officielle de Docker :
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Ajoutez le dépôt Docker à votre système :
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+# Mettez à jour l'index des paquets apt et installez Docker Engine :
+sudo apt update
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# Vérifiez que Docker est bien installé et configuré :
+docker --version
+
+# Test 
+sudo docker run hello-world
+
+# version du plugin compose 
+docker compose version 
+
+# creation containers
+sudo docker compose -p "nom_projet" -f irnc_drupal_stack_24_04_03_newports_traefik2_pgadmin.yml up -d
+
+# liste container
+sudo docker ps
+
+# les networks qui tournent
+sudo docker network ls
+
+
+sudo docker inspect drupal-postgres-1 | grep IP
